@@ -1,5 +1,5 @@
 <?php
-class Connection extends PDO {
+class Connexion extends PDO {
 	private $stmt;
 
 	public function __construct(string $dsn, string $username, string $password) {
