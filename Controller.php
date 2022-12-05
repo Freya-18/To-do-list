@@ -8,7 +8,7 @@ function __construct() {
     try{
     $action=$_REQUEST['action'];
     switch($action) {
-    //pas d'action, on r'initialise 1er appel
+    //pas d'action, on initialise 1er appel
     case NULL:
     $this->Reinit();
     break;
@@ -19,7 +19,7 @@ function __construct() {
         //mauvaise action
         default:
         $dVueEreur[] = "Erreur d'appel php";
-        require ($rep.$vues['index.php']);
+        require ($rep.$vues['erreur.php']);
         break;
         }
         } catch (PDOException $e)
@@ -53,4 +53,13 @@ function ValidationFormulaire(array $dVueEreur) {
     'data' => $data,
     );
     require ($rep.$vues['Vues/form']);
+}
+
+function Reinit(){
+    $dataVue = array();
+    //utilisation d’une vue pour afficher
+    require(__DIR__.'/../Vues/Accueil.php');
+}
+?>
+
 }
