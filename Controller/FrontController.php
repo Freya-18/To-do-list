@@ -1,5 +1,44 @@
 <?php
 
+    class FrontControleur {
+        function __construct() {
+            global $rep, $vues;
+            
+            $listeAction_User= array('connecter', 'deconnecter', 'ajouter', 'supprimer');
+            $listeAction_Vistor= array('connecter', 'deconnecter');
+            $dVueErreur = array();
+
+            try {
+                $isUser = new Utilsateur();
+
+                if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+                    $action = $_REQUEST['action'];
+                }
+                
+                if(in_array($action, $listeAction_User)) {
+                    if(!$isUser->isUser()) {
+                        require('vues/connexion.php');
+                    } else {
+                        $user = new UserControleur();
+                    }
+                } else {
+                    $user = new VisitorController();
+                }
+            }
+            catch(PDOException $e) {
+                $dVueErreur[] = "Erreur base de données !";
+                require ($rep.$vues['erreur']);
+            }
+            catch(Exception $e) {
+                $dVueErreur[] = "Erreur générale !";
+                require ($rep.$vues['erreur']);
+            }
+        }
+    }
+
+?>
+class FrontController {
+
 function __construct() {
     global $rep,$vues; // nécessaire pour utiliser variables globales
     session_start();
@@ -10,8 +49,8 @@ function __construct() {
     switch($action) {
     //pas d'action, on initialise 1er appel
     case NULL:
-    $this->Reinit();
-    break;
+        require(__DIR__.'/../Vues/Accueil.php');
+        break;
 
     case "validationFormulaire":
         $this->ValidationFormulaire($dVueEreur);
@@ -33,8 +72,6 @@ function __construct() {
         $dVueEreur[] = "Erreur inattendue!!! ";
         require ($rep.$vues['erreur']);
         }
-
-
 //fin
 exit(0);
 }//fin constructeur 
@@ -60,6 +97,5 @@ function Reinit(){
     //utilisation d’une vue pour afficher
     require(__DIR__.'/../Vues/Accueil.php');
 }
-?>
-
 }
+?>

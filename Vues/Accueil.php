@@ -9,22 +9,12 @@
 </head>
 
 <body>
-  <div class="container">
-      <nav>
-        <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="Accueil.php">ListePublic</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">ListePrivée</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./Vues/Connexion.php">Se connecter</a>
-            </li>
-        </ul>
-    </nav>
-  </div>
+  
+<?php require_once("Menu.php") ?>
 
+  <?php 
+    Foreach($tabListe as $value){
+      echo '
 <section class="vh-100" style="background-color: #eee;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -32,7 +22,7 @@
         <div class="card rounded-3">
           <div class="card-body p-4">
 
-            <h4 class="text-center my-3 pb-3">Application de To Do Liste</h4>
+            <h4 class="text-center my-3 pb-3">'.$value->get_nom().'</h4>
 
             <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
               <div class="col-12">
@@ -47,37 +37,31 @@
               </div>
 
             </form>
-
+            
             <table class="table mb-4">
               <thead>
                 <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col">Todo item</th>
+                  <th scope="col">N°</th>
+                  <th scope="col">Nom tache</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody>';
+            
+  
+              Foreach($tabTache as $value){
+                echo '
                 <tr>
                   <th scope="row">1</th>
-                  <td>In progress</td>
+                  <td>'.$value->nom.'</td>
                   <td>
                     <button type="submit" class="btn btn-danger">Supprimer</button>
                   </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>In progress</td>
-                  <td>
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>In progress</td>
-                  <td>
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                  </td>
-                </tr>
+                </tr> ';
+              }
+              
+            }
+       ?>
               </tbody>
             </table>
 

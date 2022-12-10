@@ -49,9 +49,7 @@
             
             <div>
               <a href="./Accueil.php"> Retour accueil </a>
-            </div>
-
-        
+            </div>       
           </form>
         </div>
       </div>
