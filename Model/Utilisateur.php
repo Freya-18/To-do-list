@@ -6,7 +6,7 @@ class Utilisateur {
 	protected string $password;
 	protected bool $IsAdmin;
 
-	public function __construct(int $id, string $name, string $email, string $password, bool $IsAdmin){
+	public function __construct (string $name, string $email, string $password, bool $IsAdmin=false, int $id = -1){
 		$this->id = $id;
 		$this->name = $name;
 		$this->email = $email;
@@ -29,8 +29,6 @@ class Utilisateur {
     public function get_password() : int {
         return $this->password;
     }
-
-
 
 }
 ?>

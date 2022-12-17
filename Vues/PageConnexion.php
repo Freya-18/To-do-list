@@ -30,9 +30,9 @@
           <h2 class="fw-bold mb-5">Se connecter</h2>
           <form>
 
-            <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" id="form3Example3" class="form-control" />
+              <!-- Email input -->
+              <input type="hiden" id="form3Example3" class="form-control" name="action" />
               <label class="form-label" for="form3Example3">Email address</label>
             </div>
 
@@ -48,7 +48,7 @@
             </button>
             
             <div>
-              <a href="./Accueil.php"> Retour accueil </a>
+              <a href=?action=""> Retour accueil </a>
             </div>       
           </form>
         </div>

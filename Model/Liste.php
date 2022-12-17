@@ -2,11 +2,12 @@
 
 class Liste
 {
-    private int $id;
-    private string $nom;
-    private bool $privee;
+    private  $id ;
+    private  $nom;
+    private  $privee;
+    private $taches = array();
 
-    public function _construct($nom, $id, $privee){
+    public function __construct( $nom,  $id = -1, $privee = -1){
         $this->nom=$nom;
         $this->id=$id;
         $this->privee=$privee;
@@ -16,7 +17,7 @@ class Liste
         return $this->id;
     }
 
-    public function get_nom() : int {
+    public function get_nom() : string {
         return $this->nom;
     }
     
@@ -31,4 +32,13 @@ class Liste
     public function set_nom($nom) {
         $this->nom=$nom;
     }
+
+    public function addTache($tache) {
+        $this->taches[] = $tache;
+    }
+
+    public function removeTache($tache) {
+        unset($this->taches[array_search($tache, $taches)]);
+    }
+
 }

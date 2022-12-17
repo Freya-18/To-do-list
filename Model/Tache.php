@@ -2,11 +2,11 @@
 
 class Tache{
     private int $id;   
-    private string $nom;
+    public string $nom;
     private int $liste;
     private bool $coche;
 
-    function _constructeur(int $id, string $nom, int $liste, $coche=false){
+    function __construct( string $nom, int $liste, int $id = -1, $coche=false){
         $this->id=$id;
         $this->nom=$nom;
         $this->liste=$liste;
@@ -23,6 +23,10 @@ class Tache{
 
     public function get_coche() : bool{
         return $this->coche;
+    }
+
+    public function get_liste() : int{
+        return $this->liste;
     }
 
     public function set_id($id) {

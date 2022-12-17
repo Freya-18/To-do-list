@@ -13,7 +13,7 @@
 <?php require_once("Menu.php") ?>
 
   <?php 
-    Foreach($tabListe as $value){
+    Foreach($tabListe as $liste){
       echo '
 <section class="vh-100" style="background-color: #eee;">
   <div class="container py-5 h-100">
@@ -22,22 +22,23 @@
         <div class="card rounded-3">
           <div class="card-body p-4">
 
-            <h4 class="text-center my-3 pb-3">'.$value->get_nom().'</h4>
+            <h4 class="text-center my-3 pb-3">'.$liste->get_nom().'</h4>
 
-            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" methode="POST">
               <div class="col-12">
                 <div class="form-outline">
-                  <input type="text" id="form1" class="form-control" />
+                  <input type="text" id="form1" class="form-control" name="nomEntrerTache" required/>
+                  <input type="hidden" class="btn btn-primary" name="action" value="ajouterTache"> 
                   <label class="form-label" for="form1">Entrez une tâche ici</label>
                 </div>
-              </div>
 
               <div class="col-12">
-                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <input type="hidden" name="id_liste" value="'.$liste->get_id().'">
+                <button type="submit" class="btn btn-primary">Ajouter la tache</button>
               </div>
 
             </form>
-            
+            </div>
             <table class="table mb-4">
               <thead>
                 <tr>
@@ -47,30 +48,38 @@
                 </tr>
               </thead>
               <tbody>';
-            
   
-              Foreach($tabTache as $value){
+              Foreach($taches[$liste->get_id()] as $tacheLocal){
                 echo '
                 <tr>
                   <th scope="row">1</th>
-                  <td>'.$value->nom.'</td>
+                  <td>'.$tacheLocal->get_nom().'</td>
                   <td>
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                    <form>
+                      <input type="hidden" name="idTache" value="'.$tacheLocal->get_id().'"/>
+                      <input type="hidden" class="btn btn-primary" name="action" value="supprimerTache"> 
+                      <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                    
                   </td>
-                </tr> ';
-              }
-              
-            }
-       ?>
-              </tbody>
-            </table>
+                  </tr> 
+                ';}
 
+                echo'
+      
+              </tbody>
+            </table>  
           </div>
         </div>
+        
       </div>
+      
     </div>
+    
   </div>
-</section>
+</section>';
+    }
+  ?>
 </div>
 </body>
 </html>

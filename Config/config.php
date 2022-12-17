@@ -5,19 +5,21 @@
 	$user = "labrette"; 
 	$password = "bdd2a"; 
 
+	$con=null;
+
 	//Vues
 	$views['error']='Vues/Erreur.php';
 	$views['accueil']='Vues/Accueil.php';
 	$views['connexion']='Vues/PageConnexion.php';
 
-	//ini_set('display_errors', 'on');
-	//error_reporting(E_ALL);
+	// ini_set('display_errors', 'on');
+	// error_reporting(E_ALL);
 
-	//define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
-	//define('CONTROLLER', ROOT.'controllers/');
-	//define('VIEW', ROOT.'views/');
-	//define('MODEL', ROOT.'models/');
+	// define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
+	// define('CONTROLLER', ROOT.'controllers/');
+	// define('VIEW', ROOT.'views/');
+	// define('MODEL', ROOT.'models/');
 
-	//echo MODEL; EXIT;
+	// echo MODEL; EXIT;
 	
 ?>
