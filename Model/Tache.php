@@ -1,10 +1,10 @@
 <?php
 
 class Tache{
-    private int $id;   
-    public string $nom;
-    private int $liste;
-    private bool $coche;
+    protected int $id;   
+    protected string $nom;
+    protected int $liste;
+    protected bool $coche;
 
     function __construct( string $nom, int $liste, int $id = -1, $coche=false){
         $this->id=$id;

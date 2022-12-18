@@ -14,7 +14,7 @@ class TacheGateway extends Tache {
             ':liste'=> array($id ,PDO::PARAM_INT)));
         $results=$this->con-> getResults();    
         foreach( $results as $values){
-            $Tache[] = new Tache($values['nom'], $values['liste']);
+            $Tache[] = new Tache($values['nom'], $values['liste'], $values['id']);
         }
         return $Tache;
     }
@@ -26,9 +26,9 @@ class TacheGateway extends Tache {
             ':liste' => array($tache->get_liste(), PDO::PARAM_STR)));
     }
 
-    public function removeTask($task) {
-        $query = "DELETE FROM Tache WHERE id=:id";
+    public function removeTask($idTache) {
+        $query = "DELETE FROM Tache WHERE id=:id;";
         $this->con->executeQuery($query, array(
-            ':id' => array($task->get_id(), PDO::PARAM_INT)));
+            ':id' => array($idTache, PDO::PARAM_INT)));
     }
 }

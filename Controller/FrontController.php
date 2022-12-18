@@ -2,10 +2,10 @@
 
     class FrontController {
         function __construct() {
-            global $dir,$views,$dsn,$user,$password, $con, $errors;;
+            global $dir,$views,$dsn,$user,$password, $con, $errors;
             
             $listeAction_User= array('logIn', 'logOut', 'deleteAccount');
-            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerListe', 'supprimerTache');
+            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerTache');
             $dVueErreur = array();
             try {
                 $con = new Connexion($dsn, $user, $password);
@@ -22,7 +22,7 @@
                     if(!$User->isUser()) {
                         require($dir.$views['connexion']);
                     } else {
-                        $user = new UtilisateurController($this);
+                        $user = new UtilisateurController($this, $action);
                     }
                 } else {
                     $user = new VisiteurController($this, $action);

@@ -12,7 +12,7 @@ class VisiteurController {
         try{
             switch($action) {
                 case NULL:
-					// echo "Pas d'action Visiteur";
+					$this->fc->initialisation();
 					break;
                 case "ajouterTache" : 
                     $this->ajouterTache();
@@ -21,8 +21,8 @@ class VisiteurController {
                     $this->ajouterListe();
                 case "supprimerTache":
                     $this->supprimerTache();
-                case "supprimerListe" :
-                    $this->supprimerListe();
+                // case "supprimerListe" :
+                //     $this->supprimerListe();
                 default :
                     throw new Exception ("Erreur, l'action demandée n'existe pas");
                     break;
@@ -30,6 +30,7 @@ class VisiteurController {
             }
             catch (PDOException $e)
             {
+                var_dump($e); 
             //si erreur BD, pas le cas ici
             $dVueEreur[] = "Erreur inattendue!!! ";
             require ($dir.$views['error']);
@@ -56,13 +57,13 @@ class VisiteurController {
     public function supprimerTache() {
         $tache_gw = new TacheGateway();
         $tache_gw->removeTask($_REQUEST['idTache']);
-        $this->FrontController->initialisation();
+        $this->fc->initialisation();
     } 
 
-    public function supprimerListe() {
-        $liste = new ListeGateway();
-        $liste_gw->removeList($_REQUEST['suppression']);
-        $this->frontController->initialisation();
-    } 
+    // public function supprimerListe() {
+    //     $liste_gw = new ListGateway();
+    //     $liste_gw->removeList($_REQUEST['suppression']);
+    //     $this->fc->initialisation();
+    // } 
     
 }
