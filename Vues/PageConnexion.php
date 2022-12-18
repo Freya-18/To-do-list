@@ -32,13 +32,14 @@
 
             <div class="form-outline mb-4">
               <!-- Email input -->
-              <input type="hiden" id="form3Example3" class="form-control" name="action" />
+              <input type="hiden" id="form3Example3" class="form-control" name="action" value="email"/>
               <label class="form-label" for="form3Example3">Email address</label>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
               <input type="password" id="form3Example4" class="form-control" />
+              <input type="hiden" id="form3Example3" class="form-control" name="action" value="password"/>
               <label class="form-label" for="form3Example4">Password</label>
             </div>
 
@@ -48,7 +49,7 @@
             </button>
             
             <div>
-              <a href=?action=""> Retour accueil </a>
+              <a href=?action=retourAccueil> Retour accueil </a>
             </div>       
           </form>
         </div>

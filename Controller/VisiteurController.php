@@ -11,18 +11,26 @@ class VisiteurController {
 
         try{
             switch($action) {
-                case NULL:
+                case NULL :
 					$this->fc->initialisation();
+					break;
+                case "retourAccueil" :
+                    $this->fc->initialisation();
 					break;
                 case "ajouterTache" : 
                     $this->ajouterTache();
                     break;
                 case "ajouterListe" :
                     $this->ajouterListe();
+                    break;
                 case "supprimerTache":
                     $this->supprimerTache();
-                // case "supprimerListe" :
-                //     $this->supprimerListe();
+                    break;
+                case "pageConnexion":
+                    require($dir.$views['connexion']);
+                    break;
+                case "supprimerListe" :
+                    $this->supprimerListe();
                 default :
                     throw new Exception ("Erreur, l'action demandée n'existe pas");
                     break;
@@ -30,8 +38,8 @@ class VisiteurController {
             }
             catch (PDOException $e)
             {
-                var_dump($e); 
-            //si erreur BD, pas le cas ici
+            //si erreur BD
+            var_dump($e);
             $dVueEreur[] = "Erreur inattendue!!! ";
             require ($dir.$views['error']);
             }
@@ -42,9 +50,9 @@ class VisiteurController {
     
     public function ajouterListe() {
         $liste_gw= new ListGateway();
-        $liste = new Liste(strip_tags($_REQUEST['']));
+        $liste = new Liste(strip_tags($_REQUEST['nomEntrerListe']));
         $liste_gw->addList($liste);
-        $this->FrontController->initialisation();
+        $this->fc->initialisation();
     }
 
     public function ajouterTache(){
@@ -60,10 +68,10 @@ class VisiteurController {
         $this->fc->initialisation();
     } 
 
-    // public function supprimerListe() {
-    //     $liste_gw = new ListGateway();
-    //     $liste_gw->removeList($_REQUEST['suppression']);
-    //     $this->fc->initialisation();
-    // } 
+    public function supprimerListe() {
+        $liste_gw = new ListGateway();
+        $liste_gw->removeList($_REQUEST['suppression']);
+        $this->fc->initialisation();
+    } 
     
 }

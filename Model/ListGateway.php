@@ -8,15 +8,6 @@ class ListGateway extends Liste {
         $this->con = $con; 
     }
 
-    public function insert(Liste $l): int { 
-        $query='INSERT INTO Liste VALUES (:id,:nom,:privee)'; 
-        $con->executeQuery($query, array(
-            ':id' => array($l->id,PDO::PARAM_INT ),
-            ':nom' => array($l->nom,PDO::PARAM_STR),
-            ':privee'=> array($l->priveePDO::PARAM_BOOL)));
-        // return $this->con->lastInsertId();
-    }
-
     public function delete(Liste $l) : int {
         $query='DELETE FROM ListePublic WHERE id=:id AND nom=:nom';
         $con->executeQuery($query, array(
@@ -39,23 +30,23 @@ class ListGateway extends Liste {
         $privee = 0;
         $ListePrivee = array();
         $query='SELECT * FROM Liste WHERE privee IS NULL';
-        $con->executeQuery($query);
-        $results=$con-> getResults();    
+        $this->con->executeQuery($query);
+        $results=$this->con-> getResults();    
         foreach( $results as $values){
             $ListePrivee[] = new Liste($values['nom'], $values['id'], $values['privee']);
         }
         return $ListePrivee;
     }
 
-    public function addList($liste){
-        $query = "INSERT INTO Liste (nom) VALUES (:nom);"; 
+    public function addList(Liste $liste){
+        $query = "INSERT INTO Liste(nom) VALUES (:nom);"; 
         $this->con->executeQuery($query, array(
-            ':nom' => array($liste>get_nom(), PDO::PARAM_STR)));
+            ':nom' => array($liste->get_nom(), PDO::PARAM_STR)));
    } 
 
    public function removeList($liste){
-    $query = "DELETE FROM Liste (id) VALUES (:id);"; 
+    $query = "DELETE FROM Liste WHERE (:id);"; 
     $this->con->executeQuery($query, array(
-        ':id' => array($liste>get_id(), PDO::PARAM_STR)));
+        ':id' => array($liste, PDO::PARAM_STR)));
     } 
 }

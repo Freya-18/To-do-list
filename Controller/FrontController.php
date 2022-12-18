@@ -5,7 +5,7 @@
             global $dir,$views,$dsn,$user,$password, $con, $errors;
             
             $listeAction_User= array('logIn', 'logOut', 'deleteAccount');
-            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerTache');
+            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerTache', 'supprimerListe', 'pageConnexion', 'retourAccueil');
             $dVueErreur = array();
             try {
                 $con = new Connexion($dsn, $user, $password);

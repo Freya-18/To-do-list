@@ -2,12 +2,12 @@
 
 class Liste
 {
-    private  $id ;
-    private  $nom;
-    private  $privee;
-    private $taches = array();
+    protected  $id ;
+    protected  $nom;
+    protected  $privee;
+    protected $taches = array();
 
-    public function __construct( $nom,  $id = -1, $privee = -1){
+    public function __construct( $nom,  $id = -1, $privee = 1){
         $this->nom=$nom;
         $this->id=$id;
         $this->privee=$privee;
