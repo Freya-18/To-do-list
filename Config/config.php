@@ -2,8 +2,11 @@
 	$dir=__DIR__.'/../';
 
 	$dsn = 'mysql:host=localhost;dbname=dblabrette;';
-	$user = "labrette"; 
-	$password = "bdd2a"; 
+	// $user = "labrette"; 
+	// $password = "bdd2a"; 
+
+	$user = "root";
+	$password = "";
 
 	$con=null;
 
