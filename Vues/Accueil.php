@@ -12,8 +12,6 @@
   
 <?php require_once("Menu.php") ?>
 
-  <?php 
-  echo'
   <main>
   <section>
   <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" methode="POST">
@@ -30,7 +28,8 @@
 
 </form>
 </section>
-'; 
+
+ <?php
     Foreach($tabListe as $liste){
       echo '
 <section class="vh-100" style="background-color: #eee;">
@@ -84,25 +83,22 @@
                 ';}
 
                 echo'
-      
               </tbody>
             </table>  
             <form>
-              <input type="hidden" name="suppression"  value="'.$liste->get_id().'/>
+              <input type="hidden" class="btn btn-primary" name="suppression" value="'.$liste->get_id().'"> 
               <input type="hidden" class="btn btn-primary" name="action" value="supprimerListe"> 
               <button type="submit" class="btn btn-danger">Supprimer Liste</button>
             </form>
           </div>
         </div>
-      </div>
-      
-    </div>
-    
+      </div>    
+    </div>   
   </div>
 </section>';
     }
   ?>
-</div>
+
 </main>
 </body>
 </html>

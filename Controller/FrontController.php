@@ -24,11 +24,10 @@
                     } else {
                         $user = new UtilisateurController($this, $action);
                     }
-                } else {
+                } else if(in_array($action, $listeAction_Vistor)){
+                    echo "coucou, $action";
                     $user = new VisiteurController($this, $action);
-                }
-
-                if ($action == NULL){
+                }else{
                     $this->initialisation();
                 }                 
             }
