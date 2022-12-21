@@ -4,13 +4,13 @@ class Tache{
     protected int $id;   
     protected string $nom;
     protected int $liste;
-    protected bool $coche;
+    protected bool $isCoche;
 
-    function __construct( string $nom, int $liste, int $id = -1, $coche=false){
+    function __construct( string $nom, int $liste, int $id = -1, $isCoche=false){
         $this->id=$id;
         $this->nom=$nom;
         $this->liste=$liste;
-        $this->choche=$coche;
+        $this->isCoche=$isCoche;
     }
 
     public function get_id() : int{
@@ -21,8 +21,8 @@ class Tache{
         return $this->nom;
     }
 
-    public function get_coche() : bool{
-        return $this->coche;
+    public function get_isCoche() : bool{
+        return $this->isCoche;
     }
 
     public function get_liste() : int{

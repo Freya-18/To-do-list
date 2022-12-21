@@ -1,11 +1,13 @@
 <?php
 class UtilisateurController {
 
-	private $frontController;
+	private FrontController $fc;
 
-	public function __construct($front) {
-		global $dir, $vues;
-		$this->frontController = $front;
+	public function __construct($fc, $action) {
+		global $dir,$views, $errors; 
+
+        $this->fc = $fc;
+
 		$dVueErreur = array();
 
 		$userModel = new ModelUser();
@@ -20,17 +22,6 @@ class UtilisateurController {
 				case NULL:
 					echo "Pas d'action User";
 					break;
-				case 'ajouterListe' :
-					$this->ajouterListe();
-					break;
-				case 'supprimerListe' :
-					$this->supprimerListe();
-					break;
-				case 'ajouterTache' :
-					$this->ajouterTache();
-					break;
-				case 'supprimerTache' :
-					$this->supprimerTache(); 
 				case 'logOut' :
 					$this->logOut();
 					break;
@@ -42,60 +33,38 @@ class UtilisateurController {
 					break;
 				default:
 					throw new Exception("La page n'éxiste pas !!");
-
 					break;
 			}
 		}
 		catch(PDOException $e) {
 			$dVueErreur[] =	"Erreur base de données !";
-			require ($dir.$vues['erreur']);
+			require ($dir.$views['error']);
 		}
-		catch(Exception $e) {
+		catch(Exception $e2) {
 			$dVueErreur[] =	"Erreur générale !";
-			require ($dir.$vues['erreur']);
+			require ($dir.$views['error']);
 		}
 	}
-	public function ajouterListe(){
-		global $dir, $vues;
-		$userGateway = new UserGateway();
-		$listGateway = new ListGateway();
-		$list =  new liste(strip_tags($_REQUEST['name']), $this->userGateway->getUserById()->getId());
-		$listGateway->insert($list);
-	}
-	public function supprimerListe() {
-		$taskGateway = new TacheGateway(); //mettre un sécurité pour chercher si la liste existe bien dans la bdd;
-		$listGateway->delete($_REQUEST['id']);
-
-	}
-	public function ajouterTache(){
-		$taskGateway = new TacheGateway();
-		$task = new Tache($_REQUEST['id_liste'], strip_tags($_REQUEST['nomEntrerTache']));
-		$taskGateway->addTask($task);
-		$this->frontController->initialisation();
-	}
-
-	public function supprimerTache() {
-        $tache = new TacheGateway();
-        $tache_gw->removeTask($_REQUEST['id']);
-        $this->frontController->initialisation();
-    } 
-
 	public function logOut() {
 		$modelUser =  new ModelUser();
 		$modelUser->logOut();
-		$this->frontController->initialisation();
+		$this->fc->initialisation();
 	}
 
 	public function logIn() {
 		$modelUser =  new ModelUser();
-		$modelUser->logIn();
-		$this->frontController->initialisation();
+		if ($modelUser->logIn( $_REQUEST['password'], $_REQUEST['login'])){
+			$this->fc->initialisation();
+		}else{
+			require($dir.$views['connexion']);
+		}
+		
 	}
 
 	public function deleteAccount() {
 		$modelUser = new ModelUser();
 		$modelUser->deleteAccount();
-		$this->frontController->initialisation();
+		$this->fc->initialisation();
 	}
 
 }

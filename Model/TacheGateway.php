@@ -31,4 +31,11 @@ class TacheGateway extends Tache {
         $this->con->executeQuery($query, array(
             ':id' => array($idTache, PDO::PARAM_INT)));
     }
+
+    public function updateTache($idTache, $isCoche){
+        $query = "UPDATE Tache set isCoche=:isCoche WHERE id=:id;";
+        $this->con->executeQuery($query, array(
+            ':isCoche' => array($isCoche, PDO::PARAM_BOOL),
+            ':id' => array($idTache, PDO::PARAM_INT)));
+    }
 }

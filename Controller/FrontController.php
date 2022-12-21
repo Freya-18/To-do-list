@@ -5,7 +5,7 @@
             global $dir,$views,$dsn,$user,$password, $con, $errors;
             
             $listeAction_User= array('logIn', 'logOut', 'deleteAccount');
-            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerTache', 'supprimerListe', 'pageConnexion', 'retourAccueil');
+            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerTache', 'supprimerListe', 'pageConnexion', 'retourAccueil', 'cocherCheckbox', 'decocherCheckbox');
             $dVueErreur = array();
             try {
                 $con = new Connexion($dsn, $user, $password);
@@ -19,11 +19,8 @@
                 }
                 
                 if(in_array($action, $listeAction_User)) {
-                    if(!$User->isUser()) {
-                        require($dir.$views['connexion']);
-                    } else {
-                        $user = new UtilisateurController($this, $action);
-                    }
+                    echo 'Je vais dans le utilisateur controller';
+                    $user = new UtilisateurController($this, $action);
                 } else if(in_array($action, $listeAction_Vistor)){
                     echo "coucou, $action";
                     $user = new VisiteurController($this, $action);

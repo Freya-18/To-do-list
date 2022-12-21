@@ -28,30 +28,28 @@
       <div class="row d-flex justify-content-center">
         <div class="col-lg-8">
           <h2 class="fw-bold mb-5">Se connecter</h2>
-          <form>
+
+          <form  methode="POST">
 
             <div class="form-outline mb-4">
-              <!-- Email input -->
-              <input type="hiden" id="form3Example3" class="form-control" name="action" value="email"/>
-              <label class="form-label" for="form3Example3">Email address</label>
+              <input type="text" id="form3Example3" class="form-control" name="login" placeholder="Entrer le login" required>
+              <label class="form-label" for="form3Example3">login </label>
             </div>
 
-            <!-- Password input -->
             <div class="form-outline mb-4">
-              <input type="password" id="form3Example4" class="form-control" />
-              <input type="hiden" id="form3Example3" class="form-control" name="action" value="password"/>
+              <input type="password" id="form3Example4" class="form-control" name="password" placeholder="Entrer le mot de passe" required>
               <label class="form-label" for="form3Example4">Password</label>
             </div>
 
-            <!-- Submit button -->
+            <input type="hidden" class="btn btn-primary" name="action" value="logIn"> 
             <button type="submit" class="btn btn-primary btn-block mb-4">
               Sign up
             </button>
-            
-            <div>
-              <a href=?action=retourAccueil> Retour accueil </a>
-            </div>       
+                
           </form>
+          <div>
+            <a href=?action=retourAccueil> Retour accueil </a>
+          </div> 
         </div>
       </div>
     </div>

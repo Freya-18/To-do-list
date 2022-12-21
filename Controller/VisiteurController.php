@@ -31,6 +31,9 @@ class VisiteurController {
                     break;
                 case "supprimerListe" :
                     $this->supprimerListe();
+                case "cocherCheckbox ":
+                    $this->checkbox();
+					break;
                 default :
                     throw new Exception ("Erreur, l'action demandée n'existe pas");
                     break;
@@ -39,7 +42,6 @@ class VisiteurController {
             catch (PDOException $e)
             {
             //si erreur BD
-            var_dump($e);
             $dVueEreur[] = "Erreur inattendue!!! ";
             require ($dir.$views['error']);
             }
@@ -73,5 +75,11 @@ class VisiteurController {
         $liste_gw->removeList($_REQUEST['suppression']);
         $this->fc->initialisation();
     } 
+
+    public function checkbox(){
+        $tache_gw = new TacheGateway();
+        // tache_gw->updateTache($_REQUEST['idTache'], $_REQUEST[]);
+        $this->fc->initialisation();
+    }
     
 }

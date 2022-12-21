@@ -10,35 +10,39 @@ class ModelUser {
     	}
     }
 	
-    public function logIn( String $password, String $name) {
-    	global $dir, $view;
-    	$userGateway = new Usergateway();
-    	$password = filter_var($password, FILTER_SANITIZE_STRING);
-    	$name = filter_var($name, FILTER_SANITIZE_STRING);
-    	if($userGateway->getByName($name) == NULL){
-    		if(!password_verify($password, $userGateway->getByName($name)->getPassword())) {
-    			$messageerrorConnection = 'Le mot de passe est incorrecte';
-    			require($dir.$vues['account']);
-    		}
-    		else{
-    			$messageerrorConnection = 'Le nom est incorrecte';
-    			require($dir.$vues['account']);
-    		}
-    		return false;
-    	}
-    	else {
-    		if($userGateway->getByName($name)->getIsAdmin()) {
-    			$modelAdmin = new ModelAdmin();
-    			$modelAdmin->logIn($userGateway->getByName($name));
-
-    		} else {
+    public function logIn($mdp, $loginform) {
+    	global $dir, $views;
+    	$utilisateur_gw= new UtilisateurGateway();
+		$mdp = filter_var($mdp, FILTER_SANITIZE_STRING);
+        $loginform = filter_var($loginform, FILTER_SANITIZE_STRING);
+        if (!isset($loginform)||$loginform=="") {
+            $dataVueEreur[] ="pas de login'";
+            throw new Exception('pas de login');
+        }
+        if (!isset($mdp)||$mdp=="") {
+            $dataVueEreur[] ="pas de mot de passe ";
+            throw new Exception('pas de mot de passe');
+        }       
+        $user = $utilisateur_gw->findByName($loginform);
+		var_dump($user);
+		if ($user !=NULL){
+			
+			$mdpDataBase=$user->get_password();
+            if(!password_verify($mdp, $mdpDataBase)) {
+    			$errorMessageConnexion = 'Le mot de passe est incorrecte';
+    			return true;
+    		}else{
+				
     			$_SESSION['role'] = 'user';
-    			$_SESSION['name'] = userGateway()->getByName($name)->getName();
-    		}
-    		return true;
-    	}
-
+    			$_SESSION['name'] = $loginform;
+            } 	
+		}else{
+            $errorMessageConnexion = "L'utilisateur n''existe pas";
+            require($dir.$views['connexion']);
+			exit();
+        }             
     }
+
     public function logout() {
     	session_unset();
     	session_destroy();
@@ -66,7 +70,7 @@ class ModelUser {
     	}
     	else {
     		$messageErrorRegistration = 'Le nom est déjà utilisé';
-    		require($dir.$vues['account']); 
+    		require($dir.$vues['Accueil']); 
     	}
 
     }

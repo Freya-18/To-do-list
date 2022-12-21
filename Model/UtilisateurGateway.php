@@ -1,6 +1,6 @@
 <?php
 
-class UtilisateurGateway extends UserController{
+class UtilisateurGateway extends UtilisateurController{
 	private $con;           
 
 	function __construct() {
@@ -43,12 +43,12 @@ class UtilisateurGateway extends UserController{
     }
 
     public function findByName($name) {
-        $query = 'SELECT * FROM User WHERE name =:name'; 
+        $query = 'SELECT * FROM Utilisateur WHERE name =:name'; 
         $this->con->executeQuery($query, array(
-			':name' => array($name, PDO::PARAM_STR) ));
+			':name' => array($name, PDO::PARAM_STR)));
         $user = $this->con->getResults();
         if(count($user) != 0) {
-            return new Utilisateur($user[0]['name'], $user[0]['email'], $user[0]['password'], $user[0]['IsAdmin']);
+            return new Utilisateur($user[0]['name'], $user[0]['email'], $user[0]['password'], $user[0]['IsAdmin'], $user[0]['id']);
         }
         return NULL;      
     }
