@@ -31,6 +31,10 @@ class VisiteurController {
                     break;
                 case "supprimerListe" :
                     $this->supprimerListe();
+                case "logIn" :
+                    $this->logIn();
+                case "connexion" :
+                    require($dir.$views['connexion']);
                 case "cocherCheckbox ":
                     $this->checkbox();
 					break;
@@ -80,6 +84,13 @@ class VisiteurController {
         $tache_gw = new TacheGateway();
         // tache_gw->updateTache($_REQUEST['idTache'], $_REQUEST[]);
         $this->fc->initialisation();
-    }
-    
+    }    
+
+    public function logIn() {
+		$modelUser =  new ModelUser();
+		if ($modelUser->logIn( $_REQUEST['password'], $_REQUEST['login'])){
+			$this->fc->initialisation();
+            exit();
+		}	
+	}
 }

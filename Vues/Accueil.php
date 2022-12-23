@@ -45,7 +45,7 @@
               <div class="col-12">
                 <div class="form-outline">
                   <input type="text" id="form1" class="form-control" name="nomEntrerTache" required/>
-                  <input type="hidden" class="btn btn-primary" name="action" value="ajouterTache"> 
+                  <input type="hidden" name="action" value="ajouterTache"> 
                   <label class="form-label" for="form1">Entrez une tâche ici</label>
                 </div>
 
@@ -81,7 +81,7 @@
                   <td>
                     <form method="post">
                       <input type="hidden" name="idTache" value="'.$tacheLocal->get_id().'"/>
-                      <input type="hidden" class="btn btn-primary" name="action" value="supprimerTache"> 
+                      <input type="hidden" name="action" value="supprimerTache"> 
                       <button type="submit" class="btn btn-danger">Supprimer</button>
                     </form>
                     
@@ -93,8 +93,8 @@
               </tbody>
             </table>  
             <form method="post">
-              <input type="hidden" class="btn btn-primary" name="suppression" value="'.$liste->get_id().'"> 
-              <input type="hidden" class="btn btn-primary" name="action" value="supprimerListe"> 
+              <input type="hidden" name="suppression" value="'.$liste->get_id().'"> 
+              <input type="hidden" name="action" value="supprimerListe"> 
               <button type="submit" class="btn btn-danger">Supprimer Liste</button>
             </form>
           </div>

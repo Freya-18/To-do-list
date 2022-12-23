@@ -24,11 +24,11 @@ class UtilisateurController {
 				case NULL:
 					echo "Pas d'action User";
 					break;
+				case 'pageListePrivee':
+					$this->initialisation();
+					break;
 				case 'logOut' :
 					$this->logOut();
-					break;
-				case 'logIn' :
-					$this->logIn();
 					break;
 				case 'deleteAccount' :
 					$this->this->deleteAccount();
@@ -53,20 +53,21 @@ class UtilisateurController {
 		$this->fc->initialisation();
 	}
 
-	public function logIn() {
-		$modelUser =  new ModelUser();
-		if ($modelUser->logIn( $_REQUEST['password'], $_REQUEST['login'])){
-			$this->fc->initialisation();
-		}else{
-			require($dir.$views['connexion']);
-		}		
-	}
-
 	public function deleteAccount() {
 		$modelUser = new ModelUser();
 		$modelUser->deleteAccount();
 		$this->fc->initialisation();
 	}
 
+	public function initialisation(){
+		global $dir, $views;
+		$liste_gw_= new ListGateway();
+		$tache_gw = new TacheGateway();
+		$tabListe = $liste_gw_->allListePrivee();
+		foreach ($tabListe as $t){
+			$taches[$t->get_id()] = $tache_gw->allTache($t->get_id());
+		}
+		require($dir.$views['accueil']);	
+	}
 }
 ?>

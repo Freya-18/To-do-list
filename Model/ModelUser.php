@@ -24,17 +24,15 @@ class ModelUser {
             throw new Exception('pas de mot de passe');
         }       
         $user = $utilisateur_gw->findByName($loginform);
-		var_dump($user);
 		if ($user !=NULL){
-			
 			$mdpDataBase=$user->get_password();
-            if(!password_verify($mdp, $mdpDataBase)) {
-    			$errorMessageConnexion = 'Le mot de passe est incorrecte';
-    			return true;
-    		}else{
-				
-    			$_SESSION['role'] = 'user';
-    			$_SESSION['name'] = $loginform;
+            if(password_verify($mdp, $mdpDataBase)) {
+				$_SESSION['role'] = 'user';
+    			$_SESSION['name'] = $loginform;	
+				return true;
+    		}
+			else{			
+				$errorMessageConnexion = 'Le mot de passe est incorrecte';	
             } 	
 		}else{
             $errorMessageConnexion = "L'utilisateur n''existe pas";
@@ -42,7 +40,6 @@ class ModelUser {
 			exit();
         }             
     }
-
     public function logout() {
     	session_unset();
     	session_destroy();
@@ -54,7 +51,6 @@ class ModelUser {
     	$user = $userGateway->findByName(filter_var($_SESSION['name'], FILTER_SANITIZE_STRING));
   		$listGateway->removeAllList($user);
   		$userGateway->deleteUser($user);
-
     }
     public function register(String $name, String $password) : bool{
     	global $dir, $view;
@@ -62,7 +58,7 @@ class ModelUser {
     	$name = filter_var($name, FILTER_SANITIZE_STRING);
     	$password = filter_var($password, FILTER_SANITIZE_STRING);
     	if($userGateway->getByName($name) == NULL) {
-    		$newUser = new Utilisateur(hashPaswword($password, PASSWORD_DEFAULT));
+    		$newUser = new Utilisateur(password_hash($password, PASSWORD_DEFAULT));
     		$user_gw->addUser($newUser);
     		$_SESSION['name'] = $newUser->getName();
     		$_SESSION['role'] = 'user';
@@ -72,10 +68,7 @@ class ModelUser {
     		$messageErrorRegistration = 'Le nom est déjà utilisé';
     		require($dir.$vues['Accueil']); 
     	}
-
     }
-
-
 }
 
 ?> 

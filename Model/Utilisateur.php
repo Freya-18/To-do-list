@@ -26,7 +26,7 @@ class Utilisateur {
         return $this->email;
     }
 
-    public function get_password() : int {
+    public function get_password() : string {
         return $this->password;
     }
     public function get_IsAdmin() : bool {

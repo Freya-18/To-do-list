@@ -2,12 +2,8 @@
 
 class AdminController {
 
-	private FrontController $fc;
-
-	public function __construct($fc, $action) {
+	public function __construct($action) {
 		global $dir, $views, $errors;
-
-		$this->fc = $fc;
 
 		$modelAdmin = new ModelAdmin();
 		if($modelAdmin->isAdmin() == FALSE) {
@@ -37,7 +33,6 @@ class AdminController {
 		catch(PDOException $e){
 			$dVueEreur[] = "Erreur inattendue!!! ";
             require ($dir.$views['error']);
-
 		}
 		catch (Exception $e2){
 			echo $e2 -> getMessage();
@@ -47,7 +42,7 @@ class AdminController {
 	public function removeList() {
         $liste_gw = new ListGateway();
         $liste_gw->removeList($_REQUEST['suppression']);
-        $this->fc->initialisation();
+        $this->initialisation();
 
 	}
 	public function removeUser() {
@@ -60,13 +55,20 @@ class AdminController {
 		else{
 			$listGateway->removeAllList($user);
   			$userGateway->deleteUser($user);
-			$this->fc->initialisation()
+			$this->initialisation()
 		}
 	}
 	public function removeTask() {
 		$tache_gw = new TacheGateway();
         $tache_gw->removeTask($_REQUEST['idTache']);
-        $this->fc->initialisation();
-
+        $this->initialisation();
 	}
+
+	public function initialisation($lists = [], $tasks = [], $user = '') {
+        global $dir, $views;
+        $userGateway = new UserGateway();
+        $users = $user_gw->getAllUsers();
+        require($dir.$views['admin']);
+    }
+
 }

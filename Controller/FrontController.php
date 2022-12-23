@@ -4,15 +4,15 @@
         function __construct() {
             global $dir,$views,$dsn,$user,$password, $con, $errors;
             
-            $listeAction_User= array('logIn', 'logOut', 'deleteAccount');
-            $listeAction_Vistor= array('ajouterListe', 'ajouterTache', 'supprimerTache', 'supprimerListe', 'pageConnexion', 'retourAccueil', 'cocherCheckbox', 'decocherCheckbox');
+            $listeAction_User= array('logOut','deleteAccount', 'pageListePrivee');
+            $listeAction_Vistor= array('connexion', 'ajouterListe', 'ajouterTache', 'supprimerTache', 'supprimerListe', 'pageConnexion', 'retourAccueil', 'cocherCheckbox', 'decocherCheckbox', 'logIn');
             $dVueErreur = array();
             try {
                 $con = new Connexion($dsn, $user, $password);
 
                 $User = new ModelUser();
 
-                $action=null;
+                $action = null;
 
                 if(isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
                     $action = $_REQUEST['action'];

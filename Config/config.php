@@ -14,6 +14,7 @@
 	$views['error']='Vues/Erreur.php';
 	$views['accueil']='Vues/Accueil.php';
 	$views['connexion']='Vues/PageConnexion.php';
+	$dir.$views['admin']='Vues/PageAdmin.php'
 
 	// ini_set('display_errors', 'on');
 	// error_reporting(E_ALL);

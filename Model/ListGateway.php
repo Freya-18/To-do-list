@@ -17,7 +17,7 @@ class ListGateway extends Liste {
 
     public function allListePublic() : array{
         $ListePublic = [];
-        $query='SELECT * FROM Liste WHERE privee IS NOT NULL';
+        $query='SELECT * FROM Liste WHERE privee=1';
         $this->con->executeQuery($query);
         $results=$this->con-> getResults();    
         foreach( $results as $values){
@@ -27,9 +27,8 @@ class ListGateway extends Liste {
     }
 
     public function allListePrivee() : array{
-        $privee = 0;
-        $ListePrivee = array();
-        $query='SELECT * FROM Liste WHERE privee IS NULL';
+        $ListePrivee = [];
+        $query='SELECT * FROM Liste WHERE privee=0';
         $this->con->executeQuery($query);
         $results=$this->con-> getResults();    
         foreach( $results as $values){
