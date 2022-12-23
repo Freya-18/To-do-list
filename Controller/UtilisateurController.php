@@ -57,8 +57,7 @@ class UtilisateurController {
 			$this->fc->initialisation();
 		}else{
 			require($dir.$views['connexion']);
-		}
-		
+		}		
 	}
 
 	public function deleteAccount() {
