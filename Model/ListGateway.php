@@ -33,16 +33,16 @@ class ListGateway extends Liste {
         }     
     }
 
-    // public function allListePublic() : array{
-    //     $Liste = [];
-    //     $query='SELECT * FROM Liste WHERE privee=1';
-    //     $this->con->executeQuery($query);
-    //     $results=$this->con-> getResults();    
-    //     foreach( $results as $values){
-    //         $Liste[] = new Liste($values['nom'], $values['id'], $values['proprietaire'], $values['privee']);
-    //     }
-    //     return $Liste;
-    //     }      
+    public function allListePublic() : array{
+        $Liste = [];
+        $query='SELECT * FROM Liste WHERE privee=1';
+        $this->con->executeQuery($query);
+        $results=$this->con-> getResults();    
+        foreach( $results as $values){
+            $Liste[] = new Liste($values['nom'], $values['id'], $values['proprietaire'], $values['privee']);
+        }
+        return $Liste;
+        }      
 
     public function addList(Liste $liste){
         if($liste->get_proprietaire()==-1){

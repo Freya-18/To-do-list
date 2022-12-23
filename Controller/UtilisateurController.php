@@ -14,11 +14,6 @@ class UtilisateurController {
 
 		if($userModel->isUser() == false){
 			require($dir.$views['connexion']);
-<<<<<<< HEAD
-			exit();
-=======
->>>>>>> 0e5b0bb85bc087ac2a1e5c066f112467fd22afe2
-		}
 
 		try {		
 

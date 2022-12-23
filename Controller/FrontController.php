@@ -64,7 +64,7 @@
             global $dir, $views;
             $liste_gw_= new ListGateway();
             $tache_gw = new TacheGateway();
-            $tabListe = $liste_gw_->allListe(-1);
+            $tabListe = $liste_gw_->allListePublic();
             foreach ($tabListe as $t){
                 $taches[$t->get_id()] = $tache_gw->allTache($t->get_id());
            }
