@@ -12,20 +12,22 @@ class UtilisateurController {
 
 		$userModel = new ModelUser();
 
-		if($userModel->isUser() == FALSE){
+		if($userModel->isUser() == false){
 			require($dir.$views['connexion']);
-			exit(0);
+			exit();
 		}
 
 		try {		
+
 			$action = $_REQUEST['action'];
 			
 			switch($action) {
+				
 				case NULL:
 					echo "Pas d'action User";
 					break;
 				case 'pageListePrivee':
-					$this->initialisation();
+					$this->fc->initialisation();
 					break;
 				case 'logOut' :
 					$this->logOut();
@@ -59,15 +61,5 @@ class UtilisateurController {
 		$this->fc->initialisation();
 	}
 
-	public function initialisation(){
-		global $dir, $views;
-		$liste_gw_= new ListGateway();
-		$tache_gw = new TacheGateway();
-		$tabListe = $liste_gw_->allListePrivee();
-		foreach ($tabListe as $t){
-			$taches[$t->get_id()] = $tache_gw->allTache($t->get_id());
-		}
-		require($dir.$views['accueil']);	
-	}
 }
 ?>

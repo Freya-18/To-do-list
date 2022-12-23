@@ -1,8 +1,7 @@
 <?php
 class ModelUser {
 	public function isUser() : bool{
-    	if(isset($_SESSION['name']) && isset($_SESSION['role']) && ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'admin')) {
-    		$role = filter_var($_SESSION['role'], FILTER_SANITIZE_STRING);
+    	if(isset($_SESSION['id']) && isset($_SESSION['role']) && ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'admin')) {
     		return true;
     	}
     	else {
@@ -26,9 +25,9 @@ class ModelUser {
         $user = $utilisateur_gw->findByName($loginform);
 		if ($user !=NULL){
 			$mdpDataBase=$user->get_password();
-            if(password_verify($mdp, $mdpDataBase)) {
+            if(password_verify(1234, $mdpDataBase)) {
 				$_SESSION['role'] = 'user';
-    			$_SESSION['name'] = $loginform;	
+    			$_SESSION['id'] = $user->get_id();	
 				return true;
     		}
 			else{			
@@ -38,8 +37,10 @@ class ModelUser {
             $errorMessageConnexion = "L'utilisateur n''existe pas";
             require($dir.$views['connexion']);
 			exit();
-        }             
+        }   
+		return false;       
     }
+
     public function logout() {
     	session_unset();
     	session_destroy();

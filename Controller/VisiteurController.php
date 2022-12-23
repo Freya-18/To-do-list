@@ -14,7 +14,7 @@ class VisiteurController {
                 case NULL :
 					$this->fc->initialisation();
 					break;
-                case "retourAccueil" :
+                case "retourAccueil":
                     $this->fc->initialisation();
 					break;
                 case "ajouterTache" : 
@@ -31,10 +31,13 @@ class VisiteurController {
                     break;
                 case "supprimerListe" :
                     $this->supprimerListe();
+                    break;
                 case "logIn" :
                     $this->logIn();
+                    break;
                 case "connexion" :
                     require($dir.$views['connexion']);
+                    break;
                 case "cocherCheckbox ":
                     $this->checkbox();
 					break;
@@ -56,7 +59,7 @@ class VisiteurController {
     
     public function ajouterListe() {
         $liste_gw= new ListGateway();
-        $liste = new Liste(strip_tags($_REQUEST['nomEntrerListe']));
+        $liste = new Liste(strip_tags($_REQUEST['nomEntrerListe']), $_SESSION['id'], 0);
         $liste_gw->addList($liste);
         $this->fc->initialisation();
     }
@@ -87,10 +90,14 @@ class VisiteurController {
     }    
 
     public function logIn() {
+        global $dir,$views;
 		$modelUser =  new ModelUser();
-		if ($modelUser->logIn( $_REQUEST['password'], $_REQUEST['login'])){
+		if ($modelUser->logIn($_REQUEST['password'], $_REQUEST['login'])){
+            echo"coucou";
 			$this->fc->initialisation();
             exit();
 		}	
+        require($dir.$views['connexion']);
 	}
+
 }

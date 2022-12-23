@@ -1,15 +1,13 @@
 <?php
 class Utilisateur {
-	protected string $name;
-	protected int $id;
-	protected string $email;
-	protected string $password;
-	protected bool $IsAdmin;
+	protected $name;
+	protected $id;
+	protected $password;
+	protected $IsAdmin;
 
-	public function __construct (string $name, string $email, string $password, bool $IsAdmin=false, int $id = -1){
+	public function __construct ($name,  $password,  $IsAdmin=false, $id = -1){
 		$this->id = $id;
 		$this->name = $name;
-		$this->email = $email;
 		$this->password = $password;
 		$this->IsAdmin = $IsAdmin;
 	}
@@ -20,10 +18,6 @@ class Utilisateur {
 
     public function get_name() : int {
         return $this->name;
-    }
-
-    public function get_email() : int {
-        return $this->email;
     }
 
     public function get_password() : string {

@@ -29,7 +29,7 @@
         <div class="col-lg-8">
           <h2 class="fw-bold mb-5">Se connecter</h2>
 
-          <form  methode="POST">
+          <form  method="POST">
 
             <div class="form-outline mb-4">
               <input type="text" id="form3Example3" class="form-control" name="login" placeholder="Entrer le login" required>

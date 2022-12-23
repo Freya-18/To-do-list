@@ -5,11 +5,13 @@ class Liste
     protected  $id ;
     protected  $nom;
     protected  $privee;
+    protected $proprietaire;
     protected $taches = array();
 
-    public function __construct( $nom,  $id = -1, $privee = 1){
+    public function __construct($nom, $proprietaire= -1, $privee = 1, $id = -1){
         $this->nom=$nom;
         $this->id=$id;
+        $this->proprietaire=$proprietaire;
         $this->privee=$privee;
     }
 
@@ -25,12 +27,20 @@ class Liste
         return $this->privee;
     }
 
+    public function get_proprietaire() : int {
+        return $this->proprietaire;
+    }
+
     public function set_id($id) {
         $this->id=$id;
     }
 
     public function set_nom($nom) {
         $this->nom=$nom;
+    }
+
+    public function set_proprietaire($proprietaire){
+        $this->proprietaire=$proprietaire;
     }
 
     public function addTache($tache) {

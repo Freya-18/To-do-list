@@ -11,17 +11,15 @@
 <body>
   
 <?php require_once("Menu.php") ?>
-
-  <main>
-  <section>
-  <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" method="post">
+    
+  <section style="background-color: #eee;">
+  <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mt-2" methode="post">
   
     <div class="form-outline">
       <input type="text" id="form1" class="form-control" name="nomEntrerListe" required/>
       <input type="hidden" class="btn btn-primary" name="action" value="ajouterListe" > 
       <label class="form-label" for="form1">Entrez un nom de liste ici</label>
     </div>
-
     <div class="col-12">
       <button type="submit" class="btn btn-primary">Ajouter nouvelle liste</button>
     </div>
@@ -29,19 +27,19 @@
   </form>
   </section>
 
- <?php
+<?php
     Foreach($tabListe as $liste){
       echo '
 <section class="vh-100" style="background-color: #eee;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="container py-5 h-25">
+    <div class="row d-flex justify-content-center align-items-center h-25">
       <div class="col col-lg-9 col-xl-7">
         <div class="card rounded-3">
           <div class="card-body p-4">
 
             <h4 class="text-center my-3 pb-3">'.$liste->get_nom().'</h4>
 
-            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" method="post">
+            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2" methode="post">
               <div class="col-12">
                 <div class="form-outline">
                   <input type="text" id="form1" class="form-control" name="nomEntrerTache" required/>
@@ -79,7 +77,7 @@
                   }
                   echo'
                   <td>
-                    <form method="post">
+                    <form methode="post">
                       <input type="hidden" name="idTache" value="'.$tacheLocal->get_id().'"/>
                       <input type="hidden" name="action" value="supprimerTache"> 
                       <button type="submit" class="btn btn-danger">Supprimer</button>
@@ -92,7 +90,7 @@
                 echo'
               </tbody>
             </table>  
-            <form method="post">
+            <form methode="post">
               <input type="hidden" name="suppression" value="'.$liste->get_id().'"> 
               <input type="hidden" name="action" value="supprimerListe"> 
               <button type="submit" class="btn btn-danger">Supprimer Liste</button>

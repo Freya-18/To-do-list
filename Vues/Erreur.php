@@ -30,7 +30,7 @@
                         }
                     }?>
             </h2>
-            <a href="Accueil.php">retourner à la page d'acceuille</a>
+            <a href=?action="">retourner à la page d'acceuil</a>
         </div>
     </div>
 
