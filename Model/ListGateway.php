@@ -48,5 +48,5 @@ class ListGateway extends Liste {
     $query = "DELETE FROM Liste WHERE id=:id;"; 
     $this->con->executeQuery($query, array(
         ':id' => array($liste, PDO::PARAM_INT)));
-    } 
+    }
 }

@@ -29,6 +29,9 @@ class Utilisateur {
     public function get_password() : int {
         return $this->password;
     }
+    public function get_IsAdmin() : bool {
+    	return $this->IsAdmin;
+    }
 
 }
 ?>

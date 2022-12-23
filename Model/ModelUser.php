@@ -50,8 +50,8 @@ class ModelUser {
     }
     public function deleteAccount() {
     	$listGateway = new ListGateway();
-    	$userGateway = new Usergateway();
-    	$user = $userGateway->getByName(filter_var($_SESSION['name'], FILTER_SANITIZE_STRING));
+    	$userGateway = new UtilisateurGateway();
+    	$user = $userGateway->findByName(filter_var($_SESSION['name'], FILTER_SANITIZE_STRING));
   		$listGateway->removeAllList($user);
   		$userGateway->deleteUser($user);
 
